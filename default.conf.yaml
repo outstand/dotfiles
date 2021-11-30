@@ -7,8 +7,7 @@
 - link:
     ~/.config/nvim/init.lua: nvim/init.lua
     ~/.config/nvim/lua: nvim/lua
-    # ~/.config/nvim/settings.vim: nvim/settings.vim
-    # ~/.config/nvim/solarized.vim: nvim/solarized.vim
+    ~/.config/starship.toml: starship.toml
     ~/bin:
       glob: true
       path: bin/*

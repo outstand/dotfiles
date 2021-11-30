@@ -32,10 +32,6 @@
   pushInsteadOf = "http://github.com/"
   pushInsteadOf = "git://github.com/"
   pushInsteadOf = "gh:"
-[user]
-  signingkey = 05AB53BA
-[commit]
-  gpgsign = true
 [hub]
   protocol = ssh
 [core]
