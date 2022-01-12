@@ -1,2 +1,4 @@
 # Set up dev/dash
-source /usr/local/dev-env/ansible/dash_profile
+if [ -f "/opt/dev-env/ansible/dash_profile" ]; then
+	source /opt/dev-env/ansible/dash_profile
+fi
