@@ -26,14 +26,6 @@
   prune-all = !git-prune-all
 [format]
   pretty = %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue%an%Creset %Cgreen(%cr)%Creset
-[url "git@github.com:"]
-  insteadOf = "gh:"
-  pushInsteadOf = "https://github.com/"
-  pushInsteadOf = "http://github.com/"
-  pushInsteadOf = "git://github.com/"
-  pushInsteadOf = "gh:"
-[hub]
-  protocol = ssh
 [core]
   editor = nvim
   pager = delta
