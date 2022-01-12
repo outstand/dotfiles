@@ -7,6 +7,7 @@
 - link:
     ~/.config/nvim/init.lua: nvim/init.lua
     ~/.config/nvim/lua: nvim/lua
+    ~/.config/gh/config.yml: gh-config.yml
     ~/.config/starship.toml: starship.toml
     ~/bin:
       glob: true
@@ -28,8 +29,20 @@
     ~/.zsh.after:
       relink: true
       force: true
+    ~/.local/share/sh:
+      path: share/sh
+      relink: true
+      create: true
+    ~/.config/tmuxinator:
+      path: tmuxinator
+      relink: true
+      create: true
+- ghe:
+  - mislav/gh-branch
+  - dlvhdr/gh-prs
 - shell:
   - "curl -sL https://github.com/aelsabbahy/goss/releases/download/v$(lastversion aelsabbahy/goss)/goss-linux-amd64 > ~/bin/goss-linux-amd64"
   - chmod +x ~/bin/goss-linux-amd64
   - "curl -sL https://github.com/aelsabbahy/goss/releases/download/v$(lastversion aelsabbahy/goss)/dgoss > ~/bin/dgoss"
   - chmod +x ~/bin/dgoss
+  - ~/.dotfiles/script/gh-login
