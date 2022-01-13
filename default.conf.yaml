@@ -49,4 +49,5 @@
     command: ~/.dotfiles/script/git-user
     stdin: true
     stdout: true
+    stderr: true
   - echo "Run `chsh -s $(which zsh)` to use zsh!"
