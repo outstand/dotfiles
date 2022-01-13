@@ -45,4 +45,8 @@
   - "curl -sL https://github.com/aelsabbahy/goss/releases/download/v$(lastversion aelsabbahy/goss)/dgoss > ~/bin/dgoss"
   - chmod +x ~/bin/dgoss
   - ~/.dotfiles/script/gh-login
-  - ~/.dotfiles/script/git-user
+  -
+    command: ~/.dotfiles/script/git-user
+    stdin: true
+    stdout: true
+  - chsh -s $(which zsh)
