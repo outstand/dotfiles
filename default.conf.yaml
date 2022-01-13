@@ -4,6 +4,9 @@
 - clean: []
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
+- brew:
+  - zoxide
+  - exa
 - link:
     ~/.config/nvim/init.lua: nvim/init.lua
     ~/.config/nvim/lua: nvim/lua
