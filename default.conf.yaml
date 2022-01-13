@@ -47,6 +47,7 @@
   - ~/.dotfiles/script/gh-login
   -
     command: ~/.dotfiles/script/git-user
+    description: "Set up git user and email address"
     stdin: true
     stdout: true
     stderr: true
