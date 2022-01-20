@@ -79,8 +79,7 @@ require('telescope').setup {
       "--hidden",
       "--no-ignore",
       "--follow",
-      "--glob '!.git/*'",
-    },
+   },
     color_devicons = true,
     mappings = {
       i = {
