@@ -10,11 +10,13 @@ DOTBOT_BIN="bin/dotbot"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 config="$(git config --get-all url.https://github.com/.insteadOf)"
+set +e
 read -r -d '' expected_config <<'EOF'
 git@github.com:
 ssh://git@github.com/
 http://github.com/
 EOF
+set -e
 
 if [[ "$config" != "$expected_config" ]]; then
   git config --global --replace-all url."https://github.com/".insteadOf git@github.com:
