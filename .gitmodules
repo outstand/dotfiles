@@ -10,3 +10,6 @@
 [submodule "plugins/dotbot-gh-extension"]
 	path = plugins/dotbot-gh-extension
 	url = https://github.com/fundor333/dotbot-gh-extension.git
+[submodule "plugins/dotbot-ifplatform"]
+	path = plugins/dotbot-ifplatform
+	url = https://github.com/ssbanerje/dotbot-ifplatform.git
