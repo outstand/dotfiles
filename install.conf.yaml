@@ -41,27 +41,9 @@
       path: tmuxinator
       relink: true
       create: true
-- ghe:
-  - mislav/gh-branch
-  - dlvhdr/gh-prs
 - shell:
-  - "curl -sL https://github.com/aelsabbahy/goss/releases/download/v$(lastversion aelsabbahy/goss)/goss-linux-amd64 > ~/bin/goss-linux-amd64"
-  - chmod +x ~/bin/goss-linux-amd64
   - "curl -sL https://github.com/aelsabbahy/goss/releases/download/v$(lastversion aelsabbahy/goss)/dgoss > ~/bin/dgoss"
   - chmod +x ~/bin/dgoss
-  -
-    command: ~/.dotfiles/script/gh-login
-    description: "Log in with gh"
-    stdin: true
-    stdout: true
-    stderr: true
-  -
-    command: ~/.dotfiles/script/git-user
-    description: "Set up git user and email address"
-    stdin: true
-    stdout: true
-    stderr: true
-  - echo "Run `chsh -s $(which zsh)` to use zsh!"
 
 - ifanylinux:
   - link:
@@ -71,6 +53,8 @@
         path: fonts/*
         relink: true
   - shell:
+    - "curl -sL https://github.com/aelsabbahy/goss/releases/download/v$(lastversion aelsabbahy/goss)/goss-linux-amd64 > ~/bin/goss-linux-amd64"
+    - chmod +x ~/bin/goss-linux-amd64
     - "curl -sL https://github.com/estesp/manifest-tool/releases/download/v$(lastversion estesp/manifest-tool)/manifest-tool-linux-amd64 > ~/bin/manifest-tool"
     - chmod +x ~/bin/manifest-tool
     - fc-cache -vf ~/.fonts
@@ -89,3 +73,21 @@
     - defaults write com.apple.finder AppleShowAllFiles -boolean true
     - defaults write com.apple.finder AppleShowAllExtensions -boolean true
     - defaults write com.apple.finder ShowPathbar -boolean true
+
+- shell:
+  -
+    command: ~/.dotfiles/script/gh-login
+    description: "Log in with gh"
+    stdin: true
+    stdout: true
+    stderr: true
+  -
+    command: ~/.dotfiles/script/git-user
+    description: "Set up git user and email address"
+    stdin: true
+    stdout: true
+    stderr: true
+
+- ghe:
+  - mislav/gh-branch
+  - dlvhdr/gh-prs
