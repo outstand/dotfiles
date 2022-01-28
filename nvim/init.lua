@@ -65,7 +65,10 @@ require('packer').startup(function()
   use 'tpope/vim-rvm'
   use 'rafamadriz/friendly-snippets' -- TODO: Set up
   use 'sheerun/vim-polyglot'
+  use 'outstand/logger.nvim'
 end)
+
+require('global')
 
 --Set highlight on search
 vim.o.hlsearch = false
@@ -231,6 +234,18 @@ wk.register({
     s = { t_builtin.lsp_document_symbols, "Lists LSP document symbols" },
     w = { t_builtin.lsp_dynamic_workspace_symbols, "Dynamically Lists LSP for all workspace symbols" },
   },
+  r = {
+    name = "test runners",
+  },
+  d = {
+    name = "debugger",
+    l = {
+      name = "lua",
+      l = { "<Plug>(Luadev-RunLine)", "Execute the current line" },
+      r = { "<Plug>(Luadev-Run)", "Execute lua code over a movement or text object" },
+      w = { "<Plug>(Luadev-RunWord)", "Eval identifier under cursor" },
+    },
+  },
 }, { prefix = "<leader>" })
 
 -- Gitsigns
@@ -366,7 +381,7 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting_sync()' ]]
 end
 
 -- nvim-cmp supports additional completion capabilities
@@ -382,41 +397,59 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-local function root_has_file(name)
+local lsputil = require("lspconfig.util")
+
+local function dir_has_file(dir, name)
+  return lsputil.path.exists(lsputil.path.join(dir, name)), lsputil.path.join(dir, name)
+end
+
+local function workspace_root()
   local cwd = vim.loop.cwd()
-  local lsputil = require("lspconfig.util")
-  return lsputil.path.exists(lsputil.path.join(cwd, name)), lsputil.path.join(cwd, name)
+
+  local function cb(dir, _)
+    return dir_has_file(dir, "compose.yml") or dir_has_file(dir, "docker-compose.yml")
+  end
+
+  local root, _ = lsputil.path.traverse_parents(cwd, cb)
+  return root
 end
 
 local function elixirls_cmd(opts)
   opts = opts or {}
   local fallback_dir = opts.fallback_dir or vim.env.XDG_DATA_HOME or "~/.local/share"
 
+  local root = workspace_root()
+  if not root then
+    root = vim.loop.cwd()
+  end
+
   local locations = {
-    ".bin/elixir_ls.sh",
+    ".elixir-ls-release/language_server.sh",
     ".elixir_ls/release/language_server.sh",
   }
 
   for _, location in ipairs(locations) do
-    local exists, dir = root_has_file(location)
+    local exists, dir = dir_has_file(root, location)
     if exists then
-      return vim.fn.expand(dir)
+      return logger.fmt_debug("elixirls_cmd: %s", vim.fn.expand(dir))
     end
   end
 
-  return vim.fn.expand(string.format("%s/lsp/elixir-ls/%s", fallback_dir, "language_server.sh"))
+  return logger.fmt_debug("elixirls_cmd: %s", vim.fn.expand(string.format("%s/lsp/elixir-ls/%s", fallback_dir, "language_server.sh")))
 end
 
 lspconfig.elixirls.setup{
   cmd = { elixirls_cmd() },
   settings = {
     elixirLS = {
-      mixEnv = "dev"
+      mixEnv = "test"
     }
   }
 }
-vim.lsp.set_log_level("trace")
-require("vim.lsp.log").set_format_func(vim.inspect)
+
+-- Enable LSP debugging
+-- vim.lsp.set_log_level("trace")
+-- require("vim.lsp.log").set_format_func(vim.inspect)
 
 -- Example custom server
 -- Make runtime files discoverable to the server
