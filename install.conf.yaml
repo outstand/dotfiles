@@ -43,6 +43,10 @@
       path: tmuxinator
       relink: true
       create: true
+    ~/.config/kitty:
+      path: kitty
+      relink: true
+      create: true
 - shell:
   - "curl -sL https://github.com/aelsabbahy/goss/releases/download/v$(lastversion aelsabbahy/goss)/dgoss > ~/.local/bin/dgoss"
   - chmod +x ~/.local/bin/dgoss
