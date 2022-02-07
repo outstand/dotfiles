@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+# TODO: Detect old apple bash 3.x, install brew bash, and reexec
+
 DEFAULT_CONFIG_PREFIX="install"
 CONFIG_SUFFIX=".conf.yaml"
 DOTBOT_DIR="dotbot"
