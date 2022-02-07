@@ -6,7 +6,7 @@ path=(~/bin ~/.local/bin /opt/homebrew/opt/python@3.9/libexec/bin "${homebrew_di
 
 export EDITOR="$(which nvim)"
 
-export GOSS_PATH=~/bin/goss-linux-amd64
+export GOSS_PATH=~/.local/bin/goss-linux-amd64
 export GPG_TTY=$(tty)
 
 export COMPOSE_DOCKER_CLI_BUILD=1
