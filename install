@@ -2,7 +2,16 @@
 
 set -euo pipefail
 
-# TODO: Detect old apple bash 3.x, install brew bash, and reexec
+if ! command -v brew >/dev/null; then
+  echo "You must have homebrew installed!"
+  exit 1
+fi
+
+if brew info bash | grep 'Not installed' >/dev/null; then
+  echo 'You need to first install bash with: `brew install bash`'
+  echo "Then rerun this script."
+  exit 1
+fi
 
 DEFAULT_CONFIG_PREFIX="install"
 CONFIG_SUFFIX=".conf.yaml"
