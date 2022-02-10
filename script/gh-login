@@ -3,5 +3,5 @@
 set -euo pipefail
 
 if ! gh auth status; then
-  gh auth login
+  BROWSER="${HOME}/.local/bin/xdg-open" gh auth login
 fi
