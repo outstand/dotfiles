@@ -11,6 +11,8 @@
   - ripgrep
   - universal-ctags
   - neovim
+  - gh
+  - docker-credential-helper
 - link:
     ~/.config/nvim/init.lua: nvim/init.lua
     ~/.config/nvim/lua: nvim/lua
@@ -47,9 +49,6 @@
       path: kitty
       relink: true
       create: true
-- shell:
-  - "curl -sL https://github.com/aelsabbahy/goss/releases/download/v$(lastversion aelsabbahy/goss)/dgoss > ~/.local/bin/dgoss"
-  - chmod +x ~/.local/bin/dgoss
 
 - ifanylinux:
   - link:
@@ -59,15 +58,15 @@
         path: fonts/*
         relink: true
   - shell:
-    - "curl -sL https://github.com/aelsabbahy/goss/releases/download/v$(lastversion aelsabbahy/goss)/goss-linux-amd64 > ~/.local/bin/goss-linux-amd64"
-    - chmod +x ~/.local/bin/goss-linux-amd64
-    - "curl -sL https://github.com/estesp/manifest-tool/releases/download/v$(lastversion estesp/manifest-tool)/manifest-tool-linux-amd64 > ~/.local/bin/manifest-tool"
-    - chmod +x ~/.local/bin/manifest-tool
     - fc-cache -vf ~/.fonts
     - tic -o ~/.terminfo xterm-256color-italic.terminfo
     - tic -o ~/.terminfo tmux-256color-italic.terminfo
 
 - ifmacos:
+  - tap:
+    - homebrew/cask-fonts
+  - cask:
+    - font-hack-nerd-font
   - shell:
     - "curl -sL https://github.com/estesp/manifest-tool/releases/download/v$(lastversion estesp/manifest-tool)/manifest-tool-darwin-amd64 > ~/.local/bin/manifest-tool"
     - chmod +x ~/.local/bin/manifest-tool
