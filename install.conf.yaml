@@ -1,7 +1,11 @@
 - defaults:
     link:
       create: true
-- clean: ["~/.local/bin"]
+- clean:
+    ~/:
+    ~/.local/bin:
+    ~/.config:
+      recursive: true
 - brew:
   - zoxide
   - exa
@@ -15,27 +19,32 @@
   - docker-credential-helper
   - lua-language-server
 - link:
-    ~/.config/nvim/init.lua: nvim/init.lua
-    ~/.config/nvim/lua: nvim/lua
-    ~/.config/gh/config.yml: gh-config.yml
-    ~/.config/starship.toml:
+    ~/.config/nvim/init.lua: config/nvim/init.lua
+    ~/.config/nvim/lua: config/nvim/lua
+    ~/.config/gh/config.yml: config/gh/gh-config.yml
+    ~/.config/starship.toml: config/starship/starship.toml
     ~/.local/bin:
       glob: true
       path: bin/*
       relink: true
     ~/.tmux.conf:
+      path: config/tmux/tmux.conf
       relink: true
       force: true
     ~/.tmux.conf.theme-solarized:
+      path: config/tmux/tmux.conf.theme-solarized
       relink: true
       force: true
     ~/.gitconfig:
+      path: config/git/gitconfig
       relink: true
       force: true
     ~/.zshrc:
+      path: config/zsh/zshrc
       relink: true
       force: true
     ~/.zsh.after:
+      path: config/zsh/zsh.after
       relink: true
       force: true
     ~/.local/share/sh:
@@ -43,10 +52,11 @@
       relink: true
       create: true
     ~/.config/tmuxinator:
-      path: tmuxinator
+      path: config/tmuxinator
       relink: true
       create: true
     ~/.config/kitty:
+      path: config/kitty
       path: kitty
       relink: true
       create: true
@@ -60,8 +70,6 @@
         relink: true
   - shell:
     - fc-cache -vf ~/.fonts
-    - tic -o ~/.terminfo xterm-256color-italic.terminfo
-    - tic -o ~/.terminfo tmux-256color-italic.terminfo
 
 - ifmacos:
   - tap:
@@ -69,6 +77,7 @@
   - cask:
     - font-hack-nerd-font
   - shell:
+    - ~/.dotfiles/script/1p-ssh
     - defaults write com.apple.dock autohide-time-modifier -float 0.2
     - defaults write com.apple.dock autohide-delay -float 0
     - defaults write com.apple.dock largesize -integer 95
