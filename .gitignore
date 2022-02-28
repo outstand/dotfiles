@@ -1,2 +1,2 @@
-config/zsh.after/sendgrid.zsh
-config/zsh.after/mailhog.zsh
+config/zsh/zsh.after/sendgrid.zsh
+config/zsh/zsh.after/mailhog.zsh
