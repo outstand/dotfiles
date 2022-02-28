@@ -57,7 +57,6 @@
       create: true
     ~/.config/kitty:
       path: config/kitty
-      path: kitty
       relink: true
       create: true
 
